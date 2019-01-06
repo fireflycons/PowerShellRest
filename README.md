@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/fweuumbkxs0r79um/branch/master?svg=true)](https://ci.appveyor.com/project/fireflycons/powershellrest)
+
 # PowerShellRest
 
 A RESTful server written in pure PowerShell.
