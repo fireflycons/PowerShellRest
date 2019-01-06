@@ -4,7 +4,7 @@ environment:
     secure: ZwF65Rl156oMAenHhi8BAY0LySWhhjDvNNt91dpU7D5N88E8ToZyZHCziktv7sz3
 
 os:
-- wmf5
+- WMF 5
 - Ubuntu1804
 
 # Skip on updates to the readme.
@@ -21,7 +21,7 @@ for:
 -
   matrix:
     only:
-      - os: wmf5
+      - os: WMF 5
 
   deploy_script:
     - ps: . .\build.ps1 -Task Deploy
