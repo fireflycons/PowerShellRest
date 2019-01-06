@@ -107,11 +107,23 @@ Task Test -Depends Init {
     $TestResults = Invoke-Pester @pesterParameters
 
     # In Appveyor?  Upload our tests! #Abstract this into a function?
-    If ($ENV:BHBuildSystem -eq 'AppVeyor')
+    If ($ENV:BHBuildSystem -ieq 'AppVeyor')
     {
-        (New-Object 'System.Net.WebClient').UploadFile(
-            "https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)",
-            $testOutputFile )
+        if (Test-Path -Path $testOutputFile -PathType Leaf)
+        {
+            "Publishing tests for job id: $env:APPVEYOR_JOB_ID"
+            (New-Object 'System.Net.WebClient').UploadFile(
+                "https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)",
+                $testOutputFile )
+        }
+        else
+        {
+            "Test output not found: $testOutputFile"
+        }
+    }
+    else
+    {
+        "Not AppVeyor so not publishing tests"
     }
 
     Remove-Item $testOutputFile -Force -ErrorAction SilentlyContinue
