@@ -1,12 +1,11 @@
-# See http://www.appveyor.com/docs/appveyor-yml for many more options
-
 #Publish to PowerShell Gallery with this key
 environment:
   NuGetApiKey:
     secure: ZwF65Rl156oMAenHhi8BAY0LySWhhjDvNNt91dpU7D5N88E8ToZyZHCziktv7sz3
 
-# Allow WMF5 (i.e. PowerShellGallery functionality)
-os: WMF 5
+image:
+- Visual Studio 2017
+- Ubuntu1804
 
 # Skip on updates to the readme.
 # We can force this by adding [skip ci] or [ci skip] anywhere in commit message
@@ -15,9 +14,14 @@ skip_commits:
 
 build: false
 
-#Kick off the CI/CD pipeline
 test_script:
   - ps: . .\build.ps1 -Task Test
 
-deploy_script:
-  - ps: . .\build.ps1 -Task Deploy
+for:
+-
+  matrix:
+    only:
+      - image: Visual Studio 2017
+
+  deploy_script:
+    - ps: . .\build.ps1 -Task Deploy
