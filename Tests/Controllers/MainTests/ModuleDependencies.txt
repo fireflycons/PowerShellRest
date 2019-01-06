@@ -1,0 +1,4 @@
+# Comment lines begin with # character
+# List of modules by name to preload into the execution environment
+# These modules must be installed modules, i.e. be able to be found in PSModulePath
+PowerShellGet
