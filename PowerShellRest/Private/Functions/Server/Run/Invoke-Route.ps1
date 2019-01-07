@@ -190,5 +190,5 @@ function Invoke-Route
     }
 
     # If we get here, no suitable accept mime type was found
-    return [HttpResponse]::new([HttpStatus]::PreconditionFailed, 'Cannot provide content as requested by Accept header', 'text/plain', $Context)
+    return [HttpResponse]::new([HttpStatus]::NotAcceptable, $Context)
 }

@@ -313,6 +313,25 @@ InModuleScope -Module $ModuleName {
                     }
                 }
             }
+            It 'GET /simple/a-string/1 returns NotAcceptable for unsupported explicit type text/html' {
+
+                try
+                {
+                    $rb = [RequestBuilder]::new('GET', "/simple/a-string/1").AddHeader('Accept', 'text/html')
+                    $req = [HttpRequest]::new($rb.GetStream())
+                    $req.Read()
+
+                    $response = Invoke-Route -Context $req
+                    $response.Status.StatusCode | Should Be 406
+                }
+                finally
+                {
+                    if ($rb)
+                    {
+                        $rb.Dispose()
+                    }
+                }
+            }
         }
 
         Context 'OPTIONS queries' {
