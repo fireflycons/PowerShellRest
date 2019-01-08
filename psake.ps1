@@ -88,7 +88,14 @@ Task Init {
 
 Task Test -Depends Init {
     $lines
-    "`n`tSTATUS: Testing with PowerShell $PSVersion"
+
+    "`n`tSTATUS: Testing with PowerShell $($PSVersionTable.PSVersion)"
+    "`t                     Pester $((Get-Module Pester).Version)"
+
+    if ($ENV:BHBuildSystem -ieq 'AppVeyor')
+    {
+        "`n`tAppVeyor Job ID $($env:APPVEYOR_JOB_ID)"
+    }
 
     $testOutputFile = Join-Path $ProjectRoot $TestFile
     # Gather test results. Store them in a variable and file
