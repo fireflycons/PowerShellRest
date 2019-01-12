@@ -87,7 +87,6 @@ Describe 'Integration Tests' -Tag 'Integration' {
         else
         {
             $startedMutex.ReleaseMutex()
-            Start-Sleep -Milliseconds 500
         }
 
         if ($j.State -ne 'Running')

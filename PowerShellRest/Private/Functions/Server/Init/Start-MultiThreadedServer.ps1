@@ -75,6 +75,9 @@ function Start-MultiThreadedServer
 
         if ($SharedVariables.IsPester)
         {
+            # Wait a bit for warmup
+            Start-Sleep -Seconds 1
+
             # Release mutex to allow integration tests to proceed.
             $pesterMutex.ReleaseMutex() | Out-Null
         }
