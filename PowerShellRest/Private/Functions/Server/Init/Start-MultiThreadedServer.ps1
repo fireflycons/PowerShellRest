@@ -52,6 +52,7 @@ function Start-MultiThreadedServer
         LogFolder               = Resolve-Path $LogFolder | Select-Object -ExpandProperty Path
         ModulePath              = $MyInvocation.MyCommand.Module.Path
         CanLogEvents            = $SharedVariables.CanLogEvents
+        ThreadCount             = $ThreadCount
         RequestPool             = New-RunspacePool -MaxThreads $ThreadCount -ClassPath (
                                     $ClassPath |
                                         ForEach-Object {
@@ -86,7 +87,7 @@ function Start-MultiThreadedServer
     }
     catch
     {
-        # EndInvoke threw, which means an unhandled exception in the listener thread - indicative of a bug.
+        # EndInvoke or Assert-ThreadErrors threw, which means an unhandled exception in the listener thread - indicative of a bug.
         Write-OperatingSystemLogEntry -EventId ([EventId]::Exception) "Error starting multithreaded server: $($_.Exception.Message)"
         throw
     }

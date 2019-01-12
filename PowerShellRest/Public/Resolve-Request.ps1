@@ -1,6 +1,6 @@
 function Resolve-Request
 {
-    <#
+<#
     .SYNOPSIS
         Handles an incoming request
 
@@ -21,6 +21,13 @@ function Resolve-Request
         [System.Net.Sockets.TcpClient]$TcpClient,
         [System.Threading.CancellationTokenSource]$CancellationTokenSource
     )
+
+    if ($null -eq $TcpClient)
+    {
+        # Call Resolve-Request with null client to warm thread
+        Write-OperatingSystemLogEntry -EventId ([EventId]::ThreadWarm) -Message "Thread warming"
+        return
+    }
 
     $httpLogEntry = $null
     $errorLogEntry = $null

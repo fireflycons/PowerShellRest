@@ -28,12 +28,13 @@ function Write-OperatingSystemLogEntry
         return
     }
 
+    $msg = "[PID: $($PID), TID: $([System.Threading.Thread]::CurrentThread.ManagedThreadId)] $Message"
     if ([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform([System.Runtime.InteropServices.OSPlatform]::Windows))
     {
-        Write-EventlogEntry -EventId $EventId -Message $Message
+        Write-EventlogEntry -EventId $EventId -Message $msg
     }
     else
     {
-        Write-SyslogEntry -EventId $EventId -Message $Message
+        Write-SyslogEntry -EventId $EventId -Message $msg
     }
 }

@@ -85,6 +85,15 @@ try
 
     $SharedVariables.CanLogEvents = Initialize-EventLogging
 
+    if ($null -ne $script:Plugins)
+    {
+        Write-OperatingSystemLogEntry -EventId ([EventId]::InitializationStep) -Message "Module loading with user code from $($script:Plugins -join ', ')"
+    }
+    else
+    {
+        Write-OperatingSystemLogEntry -EventId ([EventId]::InitializationStep) -Message "Module loading"
+    }
+
     if ($script:Plugins)
     {
         $script:ControllerTable = New-ControllerTable

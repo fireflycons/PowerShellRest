@@ -84,7 +84,6 @@ function New-LoggingThread
             }
             catch
             {
-                Write-EventLog -LogName Application -Source PowerShellRest -EntryType Error -EventId 100 -Message "Logging Thread`n$($_.Exception.Message)`n`n$($_.Exception.GetType().FullName)`n$($_.ScriptStackTrace)"
                 # Do nothing for now.
             }
         }

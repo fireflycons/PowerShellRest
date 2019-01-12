@@ -4,6 +4,8 @@ enum EventId
     ServerStarted = 1
     ServerStopped = 2
     InitializationStep = 3
+    ThreadWarm = 4
+    ControllerLoad = 5
     DebugEvent = 0x0f
 
     # Warning messages 0x10 - 0x1f

@@ -112,6 +112,12 @@ function New-ListenerThread
 
         try
         {
+            # Warm threads
+            1..$ThreadArguments.ThreadCount |
+            ForEach-Object {
+                [RequestHandlerTask]::new().Start($null, $threadArguments)
+            }
+
             # Create the listener
             $listener = [System.Net.Sockets.TcpListener]::new([System.Net.IPAddress]::Parse($ThreadArguments.BoundIp), $ThreadArguments.Port)
             $listener.Start()

@@ -4,7 +4,7 @@ function New-ControllerTable
     .SYNOPSIS
         Load user controller classes
 #>
-    Write-OperatingSystemLogEntry -EventId ([EventId]::InitializationStep) -Message "Loading user controllers"
+    Write-OperatingSystemLogEntry -EventId ([EventId]::ControllerLoad) -Message "Loading user controllers"
 
     # Every .PS1 file containing classes is compiled to a separate in-memory module
     # Search these modules to find types that have the [Controller] attribute
@@ -65,7 +65,7 @@ function New-ControllerTable
         throw 'No routes defined.'
     }
 
-    Write-OperatingSystemLogEntry -EventId ([EventId]::InitializationStep) -Message "Loading user controllers complete. $numControllers controller(s) loaded."
+    Write-OperatingSystemLogEntry -EventId ([EventId]::ControllerLoad) -Message "Loading user controllers complete. $numControllers controller(s) loaded."
 
     # Return controllers
     $controllerTable

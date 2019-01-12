@@ -46,7 +46,7 @@ function Write-EventlogEntry
 
     try
     {
-        Write-EventLog -LogName Application -Source $SharedVariables.ServerName -EntryType $Severity -EventId $evId -Message "(PID: $($PID), RS: $((Get-Host).RunSpace.Id)) $($Message)"
+        Write-EventLog -LogName Application -Source $SharedVariables.ServerName -EntryType $Severity -EventId $evId -Message $Message
     }
     catch
     {

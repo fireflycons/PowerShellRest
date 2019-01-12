@@ -58,7 +58,7 @@ function Write-SyslogEntry
         $priority = ($facility * 8) + $severity
 
         # Assemble the full syslog formatted message
-        $formattedMessage = "<{0}>{1} {2} {3}" -f $priority, [DateTime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffZ'), [Environment]::MachineName, "(PID: $($PID), RS: $((Get-Host).RunSpace.Id)) $($Message)"
+        $formattedMessage = "<{0}>{1} {2} {3}" -f $priority, [DateTime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffZ'), [Environment]::MachineName, $Message
 
         # If the message is too long, shorten it
         if ($formattedMessage.Length -gt 1024)
