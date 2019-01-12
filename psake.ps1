@@ -94,7 +94,7 @@ Task Test -Depends Init {
 
     if ($ENV:BHBuildSystem -ieq 'AppVeyor')
     {
-        "`n`tAppVeyor Job ID $($env:APPVEYOR_JOB_ID)"
+        "`n`tAppVeyor Job ID $($env:APPVEYOR_JOB_ID)`n"
     }
 
     $testOutputFile = Join-Path $ProjectRoot $TestFile
@@ -118,7 +118,7 @@ Task Test -Depends Init {
     {
         if (Test-Path -Path $testOutputFile -PathType Leaf)
         {
-            "Publishing tests for job id: $env:APPVEYOR_JOB_ID"
+            "Publishing tests"
             (New-Object 'System.Net.WebClient').UploadFile(
                 "https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)",
                 $testOutputFile )
@@ -127,10 +127,6 @@ Task Test -Depends Init {
         {
             "Test output not found: $testOutputFile"
         }
-    }
-    else
-    {
-        "Not AppVeyor so not publishing tests"
     }
 
     Remove-Item $testOutputFile -Force -ErrorAction SilentlyContinue
