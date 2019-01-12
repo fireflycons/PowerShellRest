@@ -39,9 +39,11 @@ function Start-MultiThreadedServer
 
     Write-OperatingSystemLogEntry -EventId ([EventId]::ServerStarted) 'Server starting'
 
-    [System.Threading.Mutex]$pesterMutex = $null
+    # Event for listener thread to signal back to this thread that it is ready to accept connections
+    $serverStartedEvent = [System.Threading.ManualResetEventSlim]::new()
 
     # Look for integration test mutex
+    [System.Threading.Mutex]$pesterMutex = $null
     $SharedVariables.IsPester = [System.Threading.Mutex]::TryOpenExisting('PesterWaitServiceStartMutex', [ref]$pesterMutex)
 
     # Block of arguments that are passed to threads
@@ -53,6 +55,7 @@ function Start-MultiThreadedServer
         ModulePath              = $MyInvocation.MyCommand.Module.Path
         CanLogEvents            = $SharedVariables.CanLogEvents
         ThreadCount             = $ThreadCount
+        ServerStartedEvent      = $serverStartedEvent
         RequestPool             = New-RunspacePool -MaxThreads $ThreadCount -ClassPath (
                                     $ClassPath |
                                         ForEach-Object {
@@ -75,8 +78,10 @@ function Start-MultiThreadedServer
 
         if ($SharedVariables.IsPester)
         {
-            # Wait a bit for warmup
-            Start-Sleep -Seconds 1
+            # We are running Pester integration tests. Need to hold Pester until we are ready
+
+            # Wait for listener to signal
+            $serverStartedEvent.Wait()
 
             # Release mutex to allow integration tests to proceed.
             $pesterMutex.ReleaseMutex() | Out-Null

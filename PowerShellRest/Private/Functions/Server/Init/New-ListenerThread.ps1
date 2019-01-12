@@ -126,6 +126,9 @@ function New-ListenerThread
 
             $running = $true
 
+            # Signal that we are accepting connections
+            $ThreadArguments.ServerStartedEvent.Set()
+
             do
             {
                 # Wait for a connection
