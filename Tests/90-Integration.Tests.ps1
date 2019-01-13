@@ -66,7 +66,11 @@ Describe 'Integration Tests' -Tag 'Integration' {
 
             # Take ownership of mutex
             $mutex = [System.Threading.Mutex]::OpenExisting('PesterWaitServiceStartMutex')
-            $mutex.WaitOne()
+
+            if (-not $mutex.WaitOne(5000))
+            {
+                throw "Could not get ownership of mutex to start the server"
+            }
 
             Import-Module $modulePath
 
@@ -94,27 +98,13 @@ Describe 'Integration Tests' -Tag 'Integration' {
             throw ($j | Receive-Job | Out-String)
         }
 
-        try
-        {
-            # Fire a request to warm up the server
-            Invoke-RestMethod http://127.0.0.1:11000/simple/a-string/1 | Out-Null
-
-            # Remove log file or testdrive will retain this entry
-            Wait-LogFile -Path $httpLogFile
-            Remove-Item $httpLogFile
-        }
-        catch
-        {
-            # Do nothing
-        }
-
         # Run each test in its own context so testdrive cleans out the log files.
 
         Context 'Single Client - Get one item' {
 
             It 'Context initialization time' {
 
-                # Swallow up the time to initialise  context which skews the time on the first test.
+                Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
             }
 
             It 'Gets one item' {
@@ -133,7 +123,7 @@ Describe 'Integration Tests' -Tag 'Integration' {
 
             It 'Context initialization time' {
 
-                # Swallow up the time to initialise  context which skews the time on the first test.
+                Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
             }
 
             It 'Gets 10 items' {
@@ -157,7 +147,7 @@ Describe 'Integration Tests' -Tag 'Integration' {
 
             It 'Context initialization time' {
 
-                # Swallow up the time to initialise  context which skews the time on the first test.
+                Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
             }
 
             ('gzip', 'deflate') |
@@ -178,7 +168,7 @@ Describe 'Integration Tests' -Tag 'Integration' {
 
             It 'Context initialization time' {
 
-                # Swallow up the time to initialise  context which skews the time on the first test.
+                Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
             }
 
             It 'Handles multiple clients' {
@@ -222,7 +212,7 @@ Describe 'Integration Tests' -Tag 'Integration' {
 
             It 'Context initialization time' {
 
-                # Swallow up the time to initialise  context which skews the time on the first test.
+                Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
             }
 
             It 'Logs exception by HTTP status code in error log file' {
@@ -273,7 +263,7 @@ Describe 'Integration Tests' -Tag 'Integration' {
 
             It 'Context initialization time' {
 
-                # Swallow up the time to initialise  context which skews the time on the first test.
+                Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
             }
 
             It 'Logs .NET exception in error log file as 500' {

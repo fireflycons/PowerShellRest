@@ -65,7 +65,7 @@ Describe 'Route Attribute Errors' {
 
         It 'Context initialization time' {
 
-            # Swallow up the time to initialise  context which skews the time on the first test.
+            Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
         }
 
         It 'Should throw when two methods in same class declare same route' {
@@ -87,7 +87,7 @@ Describe 'Route Attribute Errors' {
 
         It 'Context initialization time' {
 
-            # Swallow up the time to initialise  context which skews the time on the first test.
+            Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
         }
 
         It 'Should throw when a method defines more than one route' {
@@ -109,7 +109,7 @@ Describe 'Route Attribute Errors' {
 
         It 'Context initialization time' {
 
-            # Swallow up the time to initialise  context which skews the time on the first test.
+            Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
         }
 
         It 'Should throw when more than one controller attribute is present on a class' {
@@ -124,7 +124,7 @@ Describe 'Route Attribute Errors' {
 
         It 'Context initialization time' {
 
-            # Swallow up the time to initialise  context which skews the time on the first test.
+            Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
         }
 
         It 'Should throw if controller classes are loaded but no routes defined' {

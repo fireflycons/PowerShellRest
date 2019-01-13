@@ -16,7 +16,7 @@ InModuleScope -Module $ModuleName {
 
             It 'Context initialization time' {
 
-                # Swallow up the time to initialise  context which skews the time on the first test.
+                Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
             }
 
             It 'Should return a 404 response for a controller that is not found' {
@@ -68,7 +68,7 @@ InModuleScope -Module $ModuleName {
 
             It 'Context initialization time' {
 
-                # Swallow up the time to initialise  context which skews the time on the first test.
+                Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
             }
 
             It 'GET /simple/1 returns 1' {
@@ -204,7 +204,7 @@ InModuleScope -Module $ModuleName {
 
             It 'Context initialization time' {
 
-                # Swallow up the time to initialise  context which skews the time on the first test.
+                Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
             }
 
             It 'GET /simple/a-string/1 returns XML data when accept is text/xml' {
@@ -338,7 +338,7 @@ InModuleScope -Module $ModuleName {
 
             It 'Context initialization time' {
 
-                # Swallow up the time to initialise  context which skews the time on the first test.
+                Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
             }
 
             It 'Returns all server supported request methods for * resource' {
@@ -456,7 +456,7 @@ InModuleScope -Module $ModuleName {
 
             It 'Context initialization time' {
 
-                # Swallow up the time to initialise  context which skews the time on the first test.
+                Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
             }
 
             It 'Returns DELETE, GET, HEAD, OPTIONS, PUT for /customer/1' {
@@ -516,7 +516,7 @@ InModuleScope -Module $ModuleName {
 
             It 'Context initialization time' {
 
-                # Swallow up the time to initialise  context which skews the time on the first test.
+                Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
             }
 
             It 'Should return a response wtih correct status when HttpException is thrown by a controller' {

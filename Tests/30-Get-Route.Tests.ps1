@@ -16,7 +16,7 @@ InModuleScope -Module $ModuleName {
 
             It 'Context initialization time' {
 
-                # Swallow up the time to initialise  context which skews the time on the first test.
+                Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
             }
 
             It '/process/{computerName} should return ProcessController.GetProcesses' {

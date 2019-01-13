@@ -12,7 +12,7 @@ Describe 'RequestBuilder' {
 
         It 'Context initialization time' {
 
-            # Swallow up the time to initialise  context which skews the time on the first test.
+            Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
         }
 
         It 'Forms correct request text' {
@@ -53,7 +53,7 @@ InModuleScope $global:ModuleName {
 
             It 'Context initialization time' {
 
-                # Swallow up the time to initialise  context which skews the time on the first test.
+                Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
             }
 
             It 'Should sort accept mime types in correct order' {
@@ -81,7 +81,7 @@ InModuleScope $global:ModuleName {
 
             It 'Context initialization time' {
 
-                # Swallow up the time to initialise  context which skews the time on the first test.
+                Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
             }
 
             It 'Should sort encodings in correct order' {
@@ -124,7 +124,7 @@ InModuleScope $global:ModuleName {
 
             It 'Context initialization time' {
 
-                # Swallow up the time to initialise  context which skews the time on the first test.
+                Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
             }
 
             It 'Parses a simple GET' {
@@ -180,7 +180,7 @@ InModuleScope $global:ModuleName {
 
             It 'Context initialization time' {
 
-                # Swallow up the time to initialise  context which skews the time on the first test.
+                Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
             }
 
             It 'Parses a simple POST' {

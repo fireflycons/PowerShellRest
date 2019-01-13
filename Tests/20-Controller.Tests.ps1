@@ -13,7 +13,7 @@ Describe 'Routes' {
 
         It 'Context initialization time' {
 
-            # Swallow up the time to initialise  context which skews the time on the first test.
+            Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
         }
 
         It 'Should load routes from controller classes' {
@@ -33,7 +33,7 @@ Describe 'OLTP Controller Classes' {
 
         It 'Context initialization time' {
 
-            # Swallow up the time to initialise  context which skews the time on the first test.
+            Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
         }
 
         It 'Should get customer by Id' {
@@ -118,14 +118,14 @@ Describe 'DevOps controller classes' {
 
         It 'Context initialization time' {
 
-            # Swallow up the time to initialise  context which skews the time on the first test.
+            Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
         }
 
         It 'Should return a list of all services for local computer' {
 
             if ($isUnix)
             {
-                Set-TestInconclusive -Message "Get-Service does not exist on non-Windows platforms"
+                Set-ItResult -Inconclusive -Because "Get-Service does not exist on non-Windows platforms"
             }
             else
             {
@@ -142,7 +142,7 @@ Describe 'DevOps controller classes' {
 
             if ($isUnix)
             {
-                Set-TestInconclusive -Message "Get-Service does not exist on non-Windows platforms"
+                Set-ItResult -Inconclusive -Because "Get-Service does not exist on non-Windows platforms"
             }
             else
             {
@@ -162,7 +162,7 @@ Describe 'DevOps controller classes' {
 
             if ($isUnix)
             {
-                Set-TestInconclusive -Message "Get-Service does not exist on non-Windows platforms"
+                Set-ItResult -Inconclusive -Because "Get-Service does not exist on non-Windows platforms"
             }
             else
             {
@@ -179,7 +179,7 @@ Describe 'DevOps controller classes' {
 
         It 'Context initialization time' {
 
-            # Swallow up the time to initialise  context which skews the time on the first test.
+            Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
         }
 
         It 'Should return a list of all processes for local computer' {

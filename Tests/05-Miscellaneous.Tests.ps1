@@ -14,7 +14,7 @@ InModuleScope -ModuleName $moduleName {
 
             It 'Context initialization time' {
 
-                # Swallow up the time to initialise  context which skews the time on the first test.
+                Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
             }
 
             It 'Should find a module that exists' {
@@ -54,7 +54,7 @@ InModuleScope -ModuleName $moduleName {
 
                 It 'Context initialization time' {
 
-                    # Swallow up the time to initialise  context which skews the time on the first test.
+                    Set-ItResult -Skipped -Because "time to initialise context skews the time on the first test"
                 }
 
                 It 'Should compress and decompress text' {
