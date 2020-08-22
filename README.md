@@ -37,6 +37,8 @@ Import-Module PowerShellRest
 Start-RestServer -Port 8080 -ClassPath Tests/Controllers/MainTests -Service
 ```
 
+## Run API calls
+
 Wait for the service to print a message to say it has started, then open another PowerShell prompt.  The third call to return running operating system processes assumes you're running on Windows.
 
 ```powershell
